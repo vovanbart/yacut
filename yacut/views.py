@@ -8,15 +8,15 @@ from .utils import get_unique_short_id, check_original
 
 @app.route('/', methods=('GET', 'POST'))
 def generate_url_page():
-    form: ShortURLForm = ShortURLForm()
+    form = ShortURLForm()
     if form.validate_on_submit():
-        url: str = form.custom_id.data
+        url = form.custom_id.data
         if not url or len(url) == 0 or url is None:
-            url: str = get_unique_short_id()
+            url = get_unique_short_id()
         if check_original(url):
             flash(f'Имя {url} уже занято!', 'fail')
         else:
-            shorturl: URL_map = URL_map(
+            shorturl = URL_map(
                 original=form.original_link.data,
                 short=url
             )
