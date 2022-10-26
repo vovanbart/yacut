@@ -6,10 +6,10 @@ from yacut import db
 
 
 class URL_map(db.Model):
-    id: int = db.Column(db.Integer, primary_key=True)
-    original: str = db.Column(db.String(256), nullable=False)
-    short: str = db.Column(db.String(16))
-    timestamp: datetime = db.Column(db.DateTime, default=datetime.utcnow())
+    id = db.Column(db.Integer, primary_key=True)
+    original = db.Column(db.String(256), nullable=False)
+    short = db.Column(db.String(16))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow())
 
     def to_dict(self):
         value = dict(

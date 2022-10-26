@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length, URL, Optional, Regexp
 
 
 class ShortURLForm(FlaskForm):
-    original_link: URLField = URLField(
+    original_link = URLField(
         'Вставьте URL',
         validators=(
             DataRequired(message='Обязательное поле'),
@@ -21,4 +21,4 @@ class ShortURLForm(FlaskForm):
             Optional()
         )
     )
-    submit: SubmitField = SubmitField('Создать')
+    submit = SubmitField('Создать')

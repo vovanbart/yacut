@@ -6,7 +6,7 @@ from .models import URL_map
 
 def get_unique_short_id() -> str:
     while True:
-        short_url: str = "".join(random.choices(population=STRING, k=6))
+        short_url = "".join(random.choices(population=STRING, k=6))
         if not check_original(short_url):
             return short_url
 
