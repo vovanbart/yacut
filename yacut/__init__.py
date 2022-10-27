@@ -5,10 +5,10 @@ from flask_migrate import Migrate
 from settings import Config
 
 
-app: Flask = Flask(__name__)
+app = Flask(__name__)
 app.config.from_object(Config)
 
-db: SQLAlchemy = SQLAlchemy(app)
-migrate: Migrate = Migrate(app, db)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 from . import api_views, constants, error_handlers, views

@@ -1,7 +1,7 @@
 from flask import jsonify, request
 
 from . import app, db
-from .constants import MATCH
+from .constants import MATCH_LINK
 from .error_handlers import InvalidAPIUsage
 from .models import URL_map
 from .utils import get_unique_short_id, check_original
@@ -28,7 +28,7 @@ def push_link():
     if not data.get('custom_id'):
         data.update({'custom_id': get_unique_short_id()})
 
-    if not MATCH.search(data['custom_id']):
+    if not MATCH_LINK.search(data['custom_id']):
         raise InvalidAPIUsage('Указано недопустимое имя для короткой ссылки')
 
     if check_original(data['custom_id']):

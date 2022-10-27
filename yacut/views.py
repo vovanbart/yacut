@@ -9,20 +9,21 @@ from .utils import get_unique_short_id, check_original
 @app.route('/', methods=('GET', 'POST'))
 def generate_url_page():
     form = ShortURLForm()
-    if form.validate_on_submit():
-        url = form.custom_id.data
-        if not url or len(url) == 0 or url is None:
-            url = get_unique_short_id()
-        if check_original(url):
-            flash(f'Имя {url} уже занято!', 'fail')
-        else:
-            shorturl = URL_map(
-                original=form.original_link.data,
-                short=url
-            )
-            db.session.add(shorturl)
-            db.session.commit()
-            flash(url_for('short_url', short=url, _external=True), 'link')
+    if not form.validate_on_submit():
+        return render_template('index.html', form=form)
+    url = form.custom_id.data
+    if not url:
+        url = get_unique_short_id()
+    if check_original(url):
+        flash(f'Имя {url} уже занято!', 'fail')
+    else:
+        shorturl = URL_map(
+            original=form.original_link.data,
+            short=url
+        )
+        db.session.add(shorturl)
+        db.session.commit()
+        flash(url_for('short_url', short=url, _external=True), 'link')
     return render_template('index.html', form=form)
 
 

@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import URLField, StringField, SubmitField
 from wtforms.validators import DataRequired, Length, URL, Optional, Regexp
+from .constants import PATTERN_LINK1
 
 
 class ShortURLForm(FlaskForm):
@@ -11,11 +12,11 @@ class ShortURLForm(FlaskForm):
             URL(require_tld=True, message='Некорректная ссылка')
         )
     )
-    custom_id: StringField = StringField(
+    custom_id = StringField(
         validators=(
-            Length(1, 16),
+            Length(1, max=16),
             Regexp(
-                regex=r'[A-Za-z0-9]+',
+                regex=PATTERN_LINK1,
                 message='В сокращенние присутствуют недопустимые символы'
             ),
             Optional()
