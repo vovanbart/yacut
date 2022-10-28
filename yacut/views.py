@@ -4,9 +4,10 @@ from . import app, db
 from .forms import ShortURLForm
 from .models import URL_map
 from .utils import get_unique_short_id, check_original
+from .constants import GET, POST
 
 
-@app.route('/', methods=('GET', 'POST'))
+@app.route('/', methods=(GET, POST))
 def generate_url_page():
     form = ShortURLForm()
     if not form.validate_on_submit():
@@ -27,7 +28,7 @@ def generate_url_page():
     return render_template('index.html', form=form)
 
 
-@app.route('/<string:short>', methods=('GET',))
+@app.route('/<string:short>', methods=(GET,))
 def short_url(short):
     return redirect(
         URL_map.query.filter_by(short=short).first_or_404().original
