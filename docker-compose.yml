@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  yacut:
+    build: .
+    ports:
+      - "8001:8001"
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=sqlite:///db.sqlite3
+    volumes:
+      - .:/app
